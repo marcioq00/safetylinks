@@ -19,10 +19,10 @@ require_once "../php/checklink.php";
         <h1>Witaj na stronie</h1>
         <h3>Sprawdź czy link do filmu jest bezpieczny</h3>
         <form method="post">
-            <input type="text" name="user_link" size="50" id="user_link" placeholder="https://www.youtube.com/" required>
+            <input type="text" name="user_link" size="50" id="user_link" placeholder="https://www.youtube.com/" autocomplete="off" required>
             <input type="button" value="Sprawdź" id="sav"> 
         </form>
-       
+       <br>
         <div class="wynik">
             <p></p>
         </div>
