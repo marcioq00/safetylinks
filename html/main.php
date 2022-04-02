@@ -22,7 +22,7 @@ require_once "../php/checklink.php";
             <input type="text" name="user_link" size="50" id="user_link" placeholder="https://www.youtube.com/" autocomplete="off" required>
             <input type="button" value="Sprawdź" id="sav"> 
         </form>
-       
+       <br>
         <div class="wynik">
             <p></p>
         </div>
