@@ -7,6 +7,7 @@ require_once "../php/checklink.php";
     <head>
         <title>Sprawdź swój link</title>
         <meta charset="UTF-8">
+        <meta http-equiv="Cache-control" content="no-cache">
 
         <link rel="stylesheet" href="../css/main.css">
         <script
@@ -20,18 +21,18 @@ require_once "../php/checklink.php";
         <h3>Sprawdź czy link do filmu jest bezpieczny</h3>
         <form method="post">
             <input type="text" name="user_link" size="50" id="user_link" placeholder="https://www.youtube.com/" autocomplete="off" required>
-            <input type="button" value="Sprawdź" id="sav"> 
+            <input type="button" value="Sprawdź" id="savs"> 
         </form>
        <br>
         <div class="wynik">
             <p></p>
         </div>
-        <form autocomplete="off">
+        <form autocomplete="off" method="post">
             <div class="form-group">
                 <input type="text" class="form-control" id="search">
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-danger" value="Search">
+                <input type="submit" class="btn btn-danger" value="Search" >
                 <input type="reset" class="btn btn-danger" value="Clear">
             </div>
         </form>
@@ -43,7 +44,7 @@ require_once "../php/checklink.php";
                 </div>
             </div>
         </div>
-        <script src="../js/scripts.js" defer></script>  
+        <script src="../js/scripts.js"></script>  
         <script src="../js/safetyFile.js" defer></script>
     </body>
 </html>
