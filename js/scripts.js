@@ -1,73 +1,46 @@
-
-$(document).ready(function(){
-
+$(document).ready(function () {
+  $("#savs").click(function () {
     var API_KEY = "AIzaSyBaovj5xOx_ObFXnw7H8HRklaLJnjF8_pw";
 
-    var video = ''
+    var video = "";
 
-    $("form").submit(function (event){
-      event.preventDefault()
+    const userLink = document.getElementById("user_link").value;
+    const regExp =
+      /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const checkLink = regExp.exec(userLink);
+    var userLinkId = checkLink[2];
+    console.log(userLinkId);
 
-      var search = $("#search").val()
-      videoSearch(API_KEY,search,3)
+    //     $("form").submit(function (event){
+    event.preventDefault();
 
-    })
-    
-// $.get("https://www.googleapis.com/youtube/v3/search?key" + key + "&type=video&part=snippet&maxResults=" + maxResults + "&q=" + search,function(data){console.log(data)
-    function videoSearch(key){
-//key,search,maxResults
+    var search = $("#userLink").val();
+    videoSearch(API_KEY, userLink, 3);
 
-      const userLink = document.getElementById("user_link").value;
-      const test1 = userLink.indexOf("https://youtu.be/");
-      //const a = userLink.replace("https://youtu.be/", "")
-    console.log(userLink);
-    if (test1 == 0 && userLink.length == 28) {
-      console.log("Wyrażenie jest poprawne");
-      const deletebegin = test1.replace("https://youtu.be/", "");
-      console.log(deletebegin);
-      // Gotowy link bez jakichkolwiek edycji bezpośrednio do bazy
+    //})
 
-    } else {
-      console.log("Wyrażenie nie jest poprawne");
-      const checkFirstPartLink = userLink.replace(
-        "https://www.youtube.com/",
-        "https://youtu.be/"
-      );
-      const checkLinkAfterSlash = checkFirstPartLink.replace("watch?v=", "");
-      let readyShortenedLink = "";
+    function videoSearch(key) {
+      //key,search,maxResults
 
-      if (checkLinkAfterSlash.length > 28) {
-        readyShortenedLink = checkLinkAfterSlash.substring(0, 28);
-      }
+      $("#videos").empty();
 
-      const test = (userLink.value = String(readyShortenedLink));
-      console.log(test);
-      
-    }
+      $.get(
+        "https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" +
+          userLinkId +
+          "&maxResults=5&key=" +
+          key,
+        function (data) {
+          console.log(data);
 
-
-      $("#videos").empty()
-
-      $.get("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=_KvJDIg1CD0&maxResults=5&key=" + key,function(data){console.log(data)
-      //"https://www.googleapis.com/youtube/v3/videos?part=snippet&id=_KvJDIg1CD0&maxResults=5&key=AIzaSyBaovj5xOx_ObFXnw7H8HRklaLJnjF8_pw"
-        //"https://www.googleapis.com/youtube/v3/search?key=" + key + "&type=video&part=snippet&maxResults=" + maxResults + "&q=" + search,function(data){console.log(data)
-     // https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&key=[YOUR_API_KE
-        
-    
-        data.items.forEach(item=> {
-          video = `
+          data.items.forEach((item) => {
+            video = `
           <iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoId} " frameborder="0" allowfullscreen></iframe>
-          `
+          `;
 
-          $("#videos").append(video)
-
-        });
-        
-    })
-
+            $("#videos").append(video);
+          });
+        }
+      );
     }
-    
-
-})
-
-
+  });
+});

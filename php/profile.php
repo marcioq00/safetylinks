@@ -32,9 +32,8 @@ $stmt->close();
 ?>
 <?php 
 
-require_once "../php/dbconnect.php";
-// include_once "../php/test.php";
- include_once "../php/curlget.php";
+ require_once "../php/dbconnect.php";
+//  include_once "../php/curlget.php";
 
 
 ?>
@@ -54,6 +53,13 @@ require_once "../php/dbconnect.php";
 			}
 			a {
 				color: #fff;
+			}
+			.admin-box {
+				padding: 20px;
+				margin-top: 10px;
+				border: 2px solid green;
+				width: 50%;
+				height: 50%;
 			}
 		</style>
 		<script
@@ -92,6 +98,8 @@ require_once "../php/dbconnect.php";
 				<a href="../html/main.php">Admin page do dodawania filmów</a>
 			</div>
 		</div>
+
+<div class="admin-box">
 		<h1>Wklej tutaj swojego linka</h1>
         <h3>Admin page</h3>
         <p>Dodawaj filmy które są save dla streamerów na Twitch i nie tylko</p>
@@ -110,7 +118,7 @@ require_once "../php/dbconnect.php";
             <input type="button" value="Wyślij" id="save" class="button">
         
         </form>
-		
+</div>		
          <!-- <form autocomplete="off">
             <div class="form-group">
                 <input type="text" class="form-control" id="search">
