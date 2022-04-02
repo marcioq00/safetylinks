@@ -6,7 +6,7 @@ $(document).ready(function () {
       /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const checkLink = regExp.exec(userLink);
     const userLinkId = checkLink[2];
-
+    const info = "W bazie danych nie ma podanego rekordu";
     if (userLinkId.length == 11) {
       console.log("Correct!");
       const readyShortenedLink = "https://youtu.be/" + userLinkId;
@@ -18,9 +18,9 @@ $(document).ready(function () {
         data: {
           user: `${readyShortenedLink}`,
         },
-        success: function (output) {
-          console.log(output);
-        },
+        success: function (info) {
+          console.log(info);
+        }
       });
     }
   });
