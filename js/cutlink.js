@@ -10,12 +10,12 @@ $(document).ready(function () {
     const userLinkId = checkLink[2];
 
     if (userLinkId.length == 11) {
-      console.log("Correct!");
+      console.log("The link is correct!");
       const readyShortenedLink = "https://youtu.be/" + userLinkId;
       console.log(readyShortenedLink);
       
       $.ajax({
-        url: "../php/test.php",
+        url: "../php/sendLinktoDatabase.php",
         type: "POST",
         data: {
           user: `${readyShortenedLink}`,

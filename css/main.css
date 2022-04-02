@@ -1,0 +1,11 @@
+body {
+    /*background-color: lightgray;*/
+    background-color: rgb(32, 32, 32);
+    color: white;
+}
+.navtop {
+    background-color: purple;
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+}
