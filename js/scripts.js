@@ -31,31 +31,20 @@ $(document).ready(function () {
           userLinkId +
           "&maxResults=5&key=" +
           key,
-      // $.get(
-      //   " https://www.googleapis.com/youtube/v3/search?key=AIzaSyBaovj5xOx_ObFXnw7H8HRklaLJnjF8_pw&type=video&part=snippet&maxResults=1&videoId=es-k4IYP2lo&channelId=UCGPKmSKumoR3TbMIHwsh5qQ",
-      
+
         function (data) {
-
-          // data.items.forEach((item) => {
-          //   video = `
-          // <iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoId} " frameborder="0" allowfullscreen></iframe>
-          // `;
-
-          //   $("#videos").append(video);
-          // });
-
           video = `
           <iframe width="420" height="315" src="http://www.youtube.com/embed/${userLinkId} " frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           `;
 
-            $("#videos").append(video);
-        
-          data.items.forEach((item) =>{
+          $("#videos").append(video);
+
+          data.items.forEach((item) => {
             channelId = `${item.snippet.channelId}`;
             channelTitle = `${item.snippet.channelTitle}`;
 
-            $("#video1").append(channelTitle);
-            $("#video2").append(channelId);
+            $("#channelTitle").append(channelTitle);
+            $("#channelId").append(channelId);
           });
         }
       );

@@ -42,6 +42,12 @@ require_once "../php/checklink.php";
                 <div id="videos">
 
                 </div>
+                <div id="channelTitle">
+
+                </div>
+                <div id="channelId">
+                    
+                </div>
             </div>
         </div>
         <script src="../js/scripts.js"></script>  
