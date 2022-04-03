@@ -3,6 +3,8 @@ $(document).ready(function () {
     var API_KEY = "AIzaSyBaovj5xOx_ObFXnw7H8HRklaLJnjF8_pw";
 
     var video = "";
+    var channelTitle = "";
+    var channelId = "";
 
     const userLink = document.getElementById("user_link").value;
     const regExp =
@@ -29,15 +31,20 @@ $(document).ready(function () {
           userLinkId +
           "&maxResults=5&key=" +
           key,
-        function (data) {
-          console.log(data);
 
-          data.items.forEach((item) => {
-            video = `
-          <iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoId} " frameborder="0" allowfullscreen></iframe>
+        function (data) {
+          video = `
+          <iframe width="420" height="315" src="http://www.youtube.com/embed/${userLinkId} " frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           `;
 
-            $("#videos").append(video);
+          $("#videos").append(video);
+
+          data.items.forEach((item) => {
+            channelId = `${item.snippet.channelId}`;
+            channelTitle = `${item.snippet.channelTitle}`;
+
+            $("#channelTitle").append(channelTitle);
+            $("#channelId").append(channelId);
           });
         }
       );
