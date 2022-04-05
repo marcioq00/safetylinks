@@ -3,23 +3,20 @@ $(document).ready(function () {
     var API_KEY = "AIzaSyBaovj5xOx_ObFXnw7H8HRklaLJnjF8_pw";
 
     var video = "";
-    var channelTitle = "";
-    var channelId = "";
+    // var channelTitle = "";
+    // var channelId = "";
 
     const userLink = document.getElementById("user_link").value;
     const regExp =
       /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const checkLink = regExp.exec(userLink);
     var userLinkId = checkLink[2];
-    console.log(userLinkId);
+    //console.log(userLinkId);
 
-    //     $("form").submit(function (event){
+   
     event.preventDefault();
 
-    var search = $("#userLink").val();
     videoSearch(API_KEY, userLink, 3);
-
-    //})
 
     function videoSearch(key) {
       //key,search,maxResults
@@ -40,14 +37,27 @@ $(document).ready(function () {
           $("#videos").append(video);
 
           data.items.forEach((item) => {
-            channelId = `${item.snippet.channelId}`;
-            channelTitle = `${item.snippet.channelTitle}`;
+            const channelId = `${item.snippet.channelId}`;
+            const channelTitle = `${item.snippet.channelTitle}`;
 
             $("#channelTitle").append(channelTitle);
             $("#channelId").append(channelId);
           });
+          console.log(channelId);
         }
       );
     }
+    //console.log(channelId);
+    $.ajax({
+      url: "../php/sendLinktoDatabase.php",
+      type: "POST",
+      data: {
+        channelId: `${channelId}`,
+        channelTitle: `${channelTitle}`,
+      },
+      success: function (output) {
+        console.log(output);
+      }
+    });
   });
 });
