@@ -33,6 +33,8 @@ $stmt->close();
 <?php 
 
  require_once "../php/dbconnect.php";
+ require_once "../php/test.php";
+//  require_once "../php/sendLinktoDatabase.php";
 //  include_once "../php/curlget.php";
 
 
@@ -115,9 +117,15 @@ $stmt->close();
             Film dobry czy zły 0 lub 1:<input type="number" value="" name="save-video" min="0" max="1" id="Legit_or_not" required>
             <br>
             <br>
-            <input type="button" value="Wyślij" id="save" class="button">
+            <input type="button" value="Wyślij" id="muran" class="button">
         
         </form>
+		<div id="channelTitle" name="channelTitle">
+
+                </div>
+                <div id="channelId" name="channelId">
+                    
+                </div>
 </div>		
          <!-- <form autocomplete="off">
             <div class="form-group">
@@ -137,6 +145,7 @@ $stmt->close();
             </div>
         </div> -->
 		
-		<script src="../js/cutlink.js" defer></script>
+		<!-- <script src="../js/cutlink.js" defer></script> -->
+		<script src="../js/jsdobazy.js" defer></script>
 	</body>
 </html>
