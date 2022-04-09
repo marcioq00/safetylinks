@@ -33,7 +33,7 @@ $stmt->close();
 <?php 
 
  require_once "../php/dbconnect.php";
- require_once "../php/test.php";
+//  require_once "../php/sendLinktoDatabase.php";
 //  require_once "../php/sendLinktoDatabase.php";
 //  include_once "../php/curlget.php";
 
@@ -46,6 +46,7 @@ $stmt->close();
 		<meta charset="utf-8">
 		<meta http-equiv="Cache-control" content="no-cache">
 		<title>Profile Page</title>
+		
 		<link href="../css/main.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 		<style>
@@ -63,6 +64,9 @@ $stmt->close();
 				width: 50%;
 				height: 50%;
 			}
+			
+		
+
 		</style>
 		<script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -108,7 +112,7 @@ $stmt->close();
         <p>Jeżeli film zawiera złe słowa oznacz wtedy link cyfrą 0, jeżeli film jest bezpieczny oznacz link cyfrą 1</p>
 	
         <form method="post" name="test">
-            <input type="text" name="user_link" value="" placeholder="Tutaj wklej linka" size="80" id="user_link" required>
+            <input type="text" name="user_link" value="" placeholder="Tutaj wklej linka" size="80" id="user_link" min-length="28" max-length="120" required >
             <br>
             <br>
             <input type="text" name="user_description" value="" placeholder="Tutaj opisz powód bana" size="80" id="user_description" required>
@@ -117,26 +121,14 @@ $stmt->close();
             Film dobry czy zły 0 lub 1:<input type="number" value="" name="save-video" min="0" max="1" id="Legit_or_not" required>
             <br>
             <br>
-            <input type="button" value="Wyślij" id="muran" class="button">
+			<button type="submit" id="form-data" class="button">Wyślij</button>
         
-        </form>
-		<div id="channelTitle" name="channelTitle">
-
-                </div>
-                <div id="channelId" name="channelId">
-                    
-                </div>
-</div>		
-         <!-- <form autocomplete="off">
-            <div class="form-group">
-                <input type="text" class="form-control" id="search">
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-danger" value="Search">
-                <input type="reset" class="btn btn-danger" value="Clear">
-            </div>
-        </form> -->
-
+         </form> 
+			<div id="channelTitle" name="channelTitle"></div>
+        	<div id="channelId" name="channelId"></div>
+			<div id="result"></div>
+		</div>	
+		
         <!-- <div class="row">
             <div class="">
                 <div id="videos">
@@ -146,6 +138,9 @@ $stmt->close();
         </div> -->
 		
 		<!-- <script src="../js/cutlink.js" defer></script> -->
-		<script src="../js/jsdobazy.js" defer></script>
+		<script src="../js/dataToDatabase.js" defer></script>
+		<?php
+		require_once "../php/sendLinktoDatabase.php";
+		?>
 	</body>
 </html>
