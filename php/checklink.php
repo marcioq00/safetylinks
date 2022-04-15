@@ -1,8 +1,9 @@
-<?php 
+ <?php 
              require_once "../php/dbconnect.php";
-              $data['user'] = $_POST['user'];
+             error_reporting(0);
+              $data['readyShortenedLink'] = $_POST['readyShortenedLink'];
             
-              $ask = "SELECT yt_link, Legit_or_not FROM save_stream.user_link WHERE yt_link = :ytlink";
+              $ask = "SELECT `YtLink`, `Safe` FROM stream_security.users_links WHERE YtLink = :ytlink";
            
               $stmt = $connect->prepare($ask);
 
@@ -20,5 +21,4 @@
               }  else  {
                 echo "The movie is not safe";
               }
-                  /*test*/
-        ?>
+        ?> 
