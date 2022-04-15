@@ -2,8 +2,9 @@ $(document).ready(function () {
   $("#form-data").click(function () {
     const userLink = document.getElementById("user_link").value;
     const userLink1 = document.getElementById("user_link");
+
     if (userLink.length >= 28) {
-      console.log("poprawna długosc");
+      console.log("Correct length");
       userLink1.style.border = "2px solid green";
 
       var API_KEY = "AIzaSyBaovj5xOx_ObFXnw7H8HRklaLJnjF8_pw";
@@ -12,11 +13,23 @@ $(document).ready(function () {
       var channelTitle = "";
       var channelId = "";
 
-      const userDescription = document.getElementById("user_description").value;
-      const Legit_or_not = document.getElementById("Legit_or_not").value;
+      
+      const radioButtons = document.querySelectorAll(
+        'input[name="save-video"]'
+      );
+      let Legit_or_not;
+      for (const radioButton of radioButtons) {
+        if (radioButton.checked) {
+          Legit_or_not = radioButton.value;
+          break;
+        }
+      }
+      //console.log(Legit_or_not);
 
+      const userDescription = document.getElementById("user_description").value;
       const regExp =
         /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+
       const checkLink = regExp.exec(userLink);
       var userLinkId = checkLink[2];
       console.log(userLinkId);
@@ -27,8 +40,6 @@ $(document).ready(function () {
       videoSearch(API_KEY, userLink, 3);
 
       function videoSearch(key) {
-        //key,search,maxResults
-
         $("#videos").empty();
 
         $.get(
@@ -63,20 +74,21 @@ $(document).ready(function () {
                 channelId: `${channelId}`,
                 channelTitle: `${channelTitle}`,
               },
-              // success: function (output) {
-              //   const createDiv = document.createElement("p");
-              //   const divText = document.createTextNode("Pomyślnie wysłano");
-              //   createDiv.appendChild(divText);
-              //   const element = document.getElementById("result");
-              //   element.appendChild(createDiv);
-              //   console.log(output);
-              // },
+              success: function (output) {
+                console.log(output);
+                //   const createDiv = document.createElement("p");
+                //   const divText = document.createTextNode("Pomyślnie wysłano");
+                //   createDiv.appendChild(divText);
+                //   const element = document.getElementById("result");
+                //   element.appendChild(createDiv);
+                //   console.log(output);
+              },
             });
           }
         );
       }
     } else {
-      console.log("za mało");
+      console.log("Incorrect length");
       userLink1.style.border = "2px solid red";
     }
   });
