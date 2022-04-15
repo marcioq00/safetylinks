@@ -1,7 +1,7 @@
 <?php
 
 header("X-Frame-Options: DENY");
-// We need to use sessions, so you should always start sessions using the below code.
+
 session_start();
 // If the user is not logged in redirect to the login page...
 // if (!isset($_SESSION['loggedin'])) {
@@ -30,14 +30,9 @@ $stmt->bind_result($password, $email);
 $stmt->fetch();
 $stmt->close();
 ?>
+
 <?php 
-
  require_once "../php/dbconnect.php";
-//  require_once "../php/sendLinktoDatabase.php";
-//  require_once "../php/sendLinktoDatabase.php";
-//  include_once "../php/curlget.php";
-
-
 ?>
 
 <!DOCTYPE html>
@@ -63,10 +58,31 @@ $stmt->close();
 				border: 2px solid green;
 				width: 50%;
 				height: 50%;
+			}	
+			.check {
+				border: 1px solid white;
+				width: 200px;
+				height: 100px;
 			}
-			
-		
-
+			.img1 {
+				width: 80px;
+				height: 80px;
+			}
+			.img1:hover {
+				cursor: pointer;
+				width: 80px;
+				height: 80px;
+				background-color: green;
+			}
+			/* input[type=radio] { 
+			position: absolute;
+			opacity: 0;
+			width: 0;
+			height: 0;
+			} */
+			input[type=radio] + .img1 {
+			cursor: pointer;
+			}
 		</style>
 		<script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -117,27 +133,31 @@ $stmt->close();
             <br>
             <input type="text" name="user_description" value="" placeholder="Tutaj opisz powód bana" size="80" id="user_description" required>
             <br>
+            <br>	
+
+			 <label>
+				Good<input type="radio" value="1" name="save-video">
+				<img src="../icons8-check-mark-96.png" alt="check mark" class="img1">
+			</label>
+
+			<label>
+				Bad<input type="radio" value="0" name="save-video">
+				<img src="../icons8-cross-mark-96.png" alt="cross mark" class="img1">
+			</label>
+
             <br>
-            Film dobry czy zły 0 lub 1:<input type="number" value="" name="save-video" min="0" max="1" id="Legit_or_not" required>
             <br>
-            <br>
+
 			<button type="submit" id="form-data" class="button">Wyślij</button>
         
          </form> 
+
 			<div id="channelTitle" name="channelTitle"></div>
         	<div id="channelId" name="channelId"></div>
 			<div id="result"></div>
+
 		</div>	
 		
-        <!-- <div class="row">
-            <div class="">
-                <div id="videos">
-
-                </div>
-            </div>
-        </div> -->
-		
-		<!-- <script src="../js/cutlink.js" defer></script> -->
 		<script src="../js/dataToDatabase.js" defer></script>
 		<?php
 		require_once "../php/sendLinktoDatabase.php";
