@@ -13,7 +13,6 @@ $(document).ready(function () {
       var channelTitle = "";
       var channelId = "";
 
-      
       const radioButtons = document.querySelectorAll(
         'input[name="save-video"]'
       );
@@ -24,7 +23,7 @@ $(document).ready(function () {
           break;
         }
       }
-      //console.log(Legit_or_not);
+      console.log(Legit_or_not);
 
       const userDescription = document.getElementById("user_description").value;
       const regExp =
@@ -62,7 +61,6 @@ $(document).ready(function () {
               $("#channelTitle").append(channelTitle);
               $("#channelId").append(channelId);
             });
-            //console.log("Id channel: " + channelId);
 
             $.ajax({
               url: "../php/sendLinktoDatabase.php",
@@ -75,13 +73,21 @@ $(document).ready(function () {
                 channelTitle: `${channelTitle}`,
               },
               success: function (output) {
-                console.log(output);
-                //   const createDiv = document.createElement("p");
-                //   const divText = document.createTextNode("Pomyślnie wysłano");
-                //   createDiv.appendChild(divText);
-                //   const element = document.getElementById("result");
-                //   element.appendChild(createDiv);
-                //   console.log(output);
+                output = output.trim();
+                //console.log("Feedback from php: " + output);
+                if (output === "true") {
+                  const createDiv = document.createElement("p");
+                  const divText = document.createTextNode("Pomyślnie dodano");
+                  createDiv.appendChild(divText);
+                  const element = document.getElementById("goodResult");
+                  element.appendChild(createDiv);
+                } else {
+                  const createDiv = document.createElement("p");
+                  const divText = document.createTextNode("Dane już istnieją");
+                  createDiv.appendChild(divText);
+                  const element = document.getElementById("badResult");
+                  element.appendChild(createDiv);
+                }
               },
             });
           }

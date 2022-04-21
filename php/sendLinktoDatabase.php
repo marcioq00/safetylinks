@@ -1,6 +1,5 @@
 <?php
 require_once "../php/dbconnect.php";
-
 error_reporting(0);
 
        $date = date('d-m-y h:i:s');    
@@ -9,7 +8,7 @@ error_reporting(0);
        $data['Legit_or_not'] = $_POST['Legit_or_not'];
        $data['channelId'] = $_POST['channelId'];
        $data['channelTitle'] = $_POST['channelTitle'];
-       
+      
 
 if(!isset($data['Legit_or_not']) || empty($data['channelId']) || empty($data['channelTitle'])){
     
@@ -26,29 +25,25 @@ if(!isset($data['Legit_or_not']) || empty($data['channelId']) || empty($data['ch
        $stmt->execute();
    
        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-       if($row['num'] > 0){
-           echo "Row exists!";
+       if($row['num'] > 0){        
+           echo "Exists";         
        } else {
-   
-           $sql = "INSERT INTO stream_security.users_links (`YtLink`, `Safe`, `ChannelTitle`, `ChannelId`, `Description`, `UserTime`) VALUES (:yt_link, :Legit_or_not, :channelTitle, :channelId, :Opis_bana, :users_time)";
+
+           $sql = "INSERT INTO stream_security.users_links (`YtLink`, `Safe`, `ChannelTitle`, `ChannelId`, `Description`, `UserTime`) VALUES (:yt_link, :Legit_or_not, :channelTitle, :channelId, :banDescription, :users_time)";
    
            $statement = $connect->prepare($sql);
    
            $statement->bindValue(':yt_link', $data['readyShortenedLink']);
            $statement->bindValue(':Legit_or_not', $data['Legit_or_not']);
-           $statement->bindValue(':Opis_bana', $data['userDescription']);
+           $statement->bindValue(':banDescription', $data['userDescription']);
            $statement->bindValue(':channelTitle', $data['channelTitle']);
            $statement->bindValue(':channelId', $data['channelId']);
            $statement->bindValue(':users_time', $date);
         
-           $inserted = $statement->execute();
-           echo " Added to database";
-
-       }
+           $inserted = $statement->execute();   
+           
+            echo "true";         
+       }       
        $stmt->close();
-
-}
-     
-
+}     
 ?>
-
