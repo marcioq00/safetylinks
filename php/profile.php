@@ -1,6 +1,7 @@
 <?php
-
-header("X-Frame-Options: DENY");
+require_once "../php/sendLinktoDatabase.php";
+//require_once "../php/dbconnect.php";
+// header("X-Frame-Options: DENY");
 
 session_start();
 // If the user is not logged in redirect to the login page...
@@ -30,16 +31,11 @@ $stmt->bind_result($password, $email);
 $stmt->fetch();
 $stmt->close();
 ?>
-
-<?php 
- require_once "../php/dbconnect.php";
-?>
-
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="Cache-control" content="no-cache">
+		<!-- <meta http-equiv="Cache-control" content="no-cache"> -->
 		<title>Profile Page</title>
 		
 		<link href="../css/main.css" rel="stylesheet">
@@ -83,6 +79,18 @@ $stmt->close();
 			input[type=radio] + .img1 {
 			cursor: pointer;
 			}
+			.addResult {
+				color: green;
+				border: 1px solid white;
+				padding: 10px;
+			}
+			#goodResult {
+				color: green;
+			}
+			#badResult {
+				color: red;
+			}
+
 		</style>
 		<script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -128,7 +136,7 @@ $stmt->close();
         <p>Jeżeli film zawiera złe słowa oznacz wtedy link cyfrą 0, jeżeli film jest bezpieczny oznacz link cyfrą 1</p>
 	
         <form method="post" name="test">
-            <input type="text" name="user_link" value="" placeholder="Tutaj wklej linka" size="80" id="user_link" min-length="28" max-length="120" required >
+            <input type="text" name="user_link" value="" placeholder="Tutaj wklej linka" size="80" id="user_link" min-length="28" max-length="120" required>
             <br>
             <br>
             <input type="text" name="user_description" value="" placeholder="Tutaj opisz powód bana" size="80" id="user_description" required>
@@ -154,13 +162,12 @@ $stmt->close();
 
 			<div id="channelTitle" name="channelTitle"></div>
         	<div id="channelId" name="channelId"></div>
-			<div id="result"></div>
+			<p id="goodResult"></p>
+			<p id="badResult"></p>
 
 		</div>	
 		
 		<script src="../js/dataToDatabase.js" defer></script>
-		<?php
-		require_once "../php/sendLinktoDatabase.php";
-		?>
+		
 	</body>
 </html>
